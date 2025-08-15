@@ -69,8 +69,12 @@ class HealthCheck(BaseModel):
     
     status: str = Field(..., description="Status da API")
     timestamp: str = Field(..., description="Timestamp da verificação")
-    model_loaded: bool = Field(..., description="Indica se o modelo ML está carregado")
+    ml_model_loaded: bool = Field(..., description="Indica se o modelo ML está carregado")
     version: str = Field(..., description="Versão da API")
+    
+    model_config = {
+        "protected_namespaces": ()  # Resolve o warning do Pydantic
+    }
 
 class ErrorResponse(BaseModel):
     """Modelo para respostas de erro"""

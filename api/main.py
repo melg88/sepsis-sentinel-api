@@ -53,7 +53,7 @@ async def health_check():
     return HealthCheck(
         status=service_status["status"],
         timestamp=service_status["timestamp"],
-        model_loaded=service_status["model_loaded"],
+        ml_model_loaded=service_status["ml_model_loaded"],
         version="1.0.0"
     )
 

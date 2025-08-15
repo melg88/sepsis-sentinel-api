@@ -54,7 +54,7 @@ FASTAPI_CONFIG = {
 
 # Caminhos dos arquivos do modelo
 MODEL_PATHS = {
-    "model": os.environ.get("MODEL_PATH", "ml/model.joblib"),
+    "model": os.environ.get("MODEL_PATH", "../ml/model.joblib"),
     "feature_info": os.environ.get("FEATURE_INFO_PATH", "ml/feature_info.joblib")
 }
 

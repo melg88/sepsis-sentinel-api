@@ -15,7 +15,7 @@ def load_and_preprocess_data():
     print("Carregando dados...")
     
     # Carrega o dataset
-    df = pd.read_csv('../data/dataset_processado (1).csv')
+    df = pd.read_csv('data/dataset_processado.csv')
     
     print(f"Dataset carregado com {len(df)} registros e {len(df.columns)} colunas")
     print(f"Colunas disponíveis: {list(df.columns)}")

@@ -75,7 +75,7 @@ class SepsisService:
         """Retorna o status de saúde do serviço"""
         return {
             "status": "healthy" if self.model_loaded else "unhealthy",
-            "model_loaded": self.model_loaded,
+            "ml_model_loaded": self.model_loaded,
             "timestamp": datetime.now().isoformat(),
             "service": "SepsisService"
         }

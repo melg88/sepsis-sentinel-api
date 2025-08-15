@@ -58,7 +58,7 @@ def train_model():
     print("\n🤖 Iniciando treinamento do modelo...")
     
     # Verifica se o dataset existe
-    dataset_path = Path("data/dataset_processado (1).csv")
+    dataset_path = Path("data/dataset_processado.csv")
     if not dataset_path.exists():
         print(f"❌ Dataset não encontrado em {dataset_path}")
         return False

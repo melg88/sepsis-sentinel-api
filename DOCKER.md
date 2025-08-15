@@ -114,7 +114,7 @@ docker-compose build --no-cache
 ### Erro: "Model not found"
 ```bash
 # Verificar se o modelo existe
-ls -la ml/model.joblib
+ls -la /..ml/model.joblib
 
 # Treinar modelo se necessário
 docker-compose exec api python ml/train_model.py
