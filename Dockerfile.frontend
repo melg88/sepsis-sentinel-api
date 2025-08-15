@@ -1,0 +1,29 @@
+# Dockerfile para Frontend Streamlit
+FROM python:3.9-slim
+
+# Define diretório de trabalho
+WORKDIR /app
+
+# Instala dependências do sistema
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copia arquivos de dependências
+COPY requirements.txt .
+
+# Instala dependências Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o código da aplicação
+COPY . .
+
+# Cria diretório para logs
+RUN mkdir -p logs
+
+# Expõe a porta do Streamlit
+EXPOSE 8501
+
+# Comando para iniciar o Streamlit
+CMD ["streamlit", "run", "frontend/app.py", "--server.port=8501", "--server.address=0.0.0.0"]
