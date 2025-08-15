@@ -80,11 +80,13 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 .traffic-light-circle {
-    width: 250px;
-    height: 250px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -93,6 +95,7 @@ body {
     color: white;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     margin-bottom: 2rem;
+    border: 4px solid rgba(255,255,255,0.3);
 }
 
 .traffic-light-circle.green { background: linear-gradient(145deg, #66bb6a, #388e3c); }
@@ -100,18 +103,20 @@ body {
 .traffic-light-circle.red { background: linear-gradient(145deg, #ef5350, #c62828); }
 
 .probability-value {
-    font-size: 5rem;
+    font-size: 3.5rem;
     font-weight: bold;
     line-height: 1;
+    margin-bottom: 0.2rem;
 }
 
 .probability-label {
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
+    opacity: 0.9;
 }
 
 .result-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
@@ -121,9 +126,80 @@ body {
 .result-title.red-text { color: #c62828; }
 
 .result-message {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     max-width: 600px;
+    line-height: 1.6;
 }
+
+/* Grids para detalhes */
+.details-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    margin: 2rem 0;
+    width: 100%;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .details-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+.detail-card {
+    background: white;
+    border-radius: 15px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid #e0e0e0;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    min-height: 500px;
+}
+
+.detail-card h3 {
+    color: #004d40;
+    margin-bottom: 1.2rem;
+    font-size: 1.3rem;
+    border-bottom: 2px solid #00796b;
+    padding-bottom: 0.5rem;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    min-height: 2.8rem;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.detail-value {
+    font-weight: 500;
+    color: #333;
+    background: #f8f9fa;
+    padding: 0.3rem 0.8rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+/* Grid para métricas (removido - não usado mais) */
 
 /* Estilos para histórico */
 .history-container {
@@ -142,6 +218,74 @@ body {
     border-radius: 15px;
     text-align: center;
     margin: 20px 0;
+}
+
+/* Melhorias gerais */
+.stMarkdown {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Estilo para botões */
+.stButton > button {
+    border-radius: 25px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.stButton > button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+/* Estilo para inputs */
+.stNumberInput > div > div > input {
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.stNumberInput > div > div > input:focus {
+    border-color: #00796b;
+    box-shadow: 0 0 0 3px rgba(0, 119, 107, 0.1);
+}
+
+/* Estilo para selectbox */
+.stSelectbox > div > div > div {
+    border-radius: 12px;
+    border: 2px solid #e0e0e0;
+}
+
+/* Estilo para tabs */
+.stTabs > div > div > div > div {
+    border-radius: 15px 15px 0 0;
+    overflow: hidden;
+}
+
+.stTabs > div > div > div > div > button {
+    border-radius: 0;
+    font-weight: 600;
+}
+
+/* Estilo para spinner */
+.stSpinner > div {
+    border-radius: 50%;
+}
+
+/* Estilo para métricas do Streamlit */
+.stMetric > div > div > div {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-radius: 12px;
+    padding: 1rem;
+    border: 1px solid #dee2e6;
+}
+
+/* Estilo para dataframes */
+.stDataFrame > div > div > div > div {
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 </style>
@@ -358,20 +502,92 @@ def show_result_page():
     </div>
     """, unsafe_allow_html=True)
 
-    # Informações adicionais
+    # Informações adicionais em grids organizados
     st.markdown("<br>", unsafe_allow_html=True)
     
-    col_info1, col_info2 = st.columns(2)
+    # Grid de detalhes organizados - lado a lado
+    st.markdown('<div class="details-grid">', unsafe_allow_html=True)
     
-    with col_info1:
-        st.subheader("📋 Detalhes da Predição")
-        st.metric("Probabilidade", f"{probability:.1%}")
-        st.metric("Nível de Risco", result["risk_level"])
-        
-    with col_info2:
-        st.subheader("📊 Dados do Paciente")
-        patient_df = pd.DataFrame([st.session_state.predictions[-1]["patient_data"]])
-        st.dataframe(patient_df.T, use_container_width=True)
+    # Card de Detalhes da Predição
+    st.markdown("""
+    <div class="detail-card">
+        <h3>📋 Detalhes da Predição</h3>
+        <div class="detail-item">
+            <span class="detail-label">Probabilidade:</span>
+            <span class="detail-value">{:.1%}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Nível de Risco:</span>
+            <span class="detail-value">{}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Confiança:</span>
+            <span class="detail-value">Alta</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Status:</span>
+            <span class="detail-value">Processado</span>
+        </div>
+    </div>
+    """.format(probability, result["risk_level"]), unsafe_allow_html=True)
+    
+    # Card de Dados do Paciente
+    patient_data = st.session_state.predictions[-1]["patient_data"]
+    
+    # Mapeamento de nomes em português
+    field_names = {
+        'hr': 'Frequência Cardíaca (bpm)',
+        'o2sat': 'Saturação de Oxigênio (%)',
+        'temp': 'Temperatura Corporal (°C)',
+        'sbp': 'Pressão Sistólica (mmHg)',
+        'dbp': 'Pressão Diastólica (mmHg)',
+        'map': 'Pressão Arterial Média (mmHg)',
+        'resp': 'Taxa Respiratória (rpm)',
+        'age': 'Idade (anos)',
+        'gender': 'Gênero',
+        'unit1': 'Unidade 1',
+        'unit2': 'Unidade 2',
+        'hosp_adm_time': 'Tempo de Internação (h)',
+        'iculos': 'Tempo na UTI (h)'
+    }
+    
+    # Mapeamento de valores para gênero
+    gender_values = {0: 'Feminino', 1: 'Masculino'}
+    unit_values = {0: 'Não', 1: 'Sim'}
+    
+    st.markdown("""
+    <div class="detail-card">
+        <h3>📊 Dados do Paciente</h3>
+    """, unsafe_allow_html=True)
+    
+    # Adiciona cada campo com nome em português
+    for field, value in patient_data.items():
+        if field in field_names:
+            display_name = field_names[field]
+            
+            # Formata valores especiais
+            if field == 'gender':
+                display_value = gender_values.get(value, str(value))
+            elif field in ['unit1', 'unit2']:
+                display_value = unit_values.get(value, str(value))
+            elif field in ['temp', 'map']:
+                display_value = f"{value:.1f}"
+            elif field in ['hosp_adm_time', 'iculos']:
+                display_value = f"{value:.0f}"
+            else:
+                display_value = str(value)
+            
+            st.markdown(f"""
+            <div class="detail-item">
+                <span class="detail-label">{display_name}:</span>
+                <span class="detail-value">{display_value}</span>
+            </div>
+            """, unsafe_allow_html=True)
+    
+    st.markdown("</div>", unsafe_allow_html=True)
+    
+    # Fecha o grid
+    st.markdown('</div>', unsafe_allow_html=True)
 
     st.markdown("<br><br>", unsafe_allow_html=True)
     _, col_button, _ = st.columns([2, 3, 2])
@@ -400,6 +616,18 @@ def show_history_page():
             })
         
         history_df = pd.DataFrame(history_data)
+        
+        # Estilo melhorado para o DataFrame
+        st.markdown("""
+        <style>
+        .stDataFrame {
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         st.dataframe(history_df, use_container_width=True)
         
         # Gráfico de evolução temporal
