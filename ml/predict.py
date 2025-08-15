@@ -16,7 +16,6 @@ class SepsisPredictor:
             raise Exception(f"Erro ao carregar modelo: {str(e)}")
     
     def preprocess_input(self, input_data: Dict[str, Any]) -> np.ndarray:
-        # Mapeia os nomes das features de entrada para as features do modelo
         feature_mapping = {
             'hr': 'HR_mean',
             'o2sat': 'O2Sat_mean', 
@@ -45,20 +44,16 @@ class SepsisPredictor:
             if input_key and input_key in input_data:
                 features.append(input_data[input_key])
             else:
-                # Valor padrão se a feature não for fornecida
                 features.append(0.0)
         
         return np.array(features).reshape(1, -1)
     
     def predict(self, input_data: Dict[str, Any]) -> Tuple[float, str, str]:
         try:
-            # Pré-processa os dados
             X = self.preprocess_input(input_data)
             
-            # Faz a predição
             prediction_proba = self.model.predict_proba(X)[0, 1]
             
-            # Determina o nível de risco
             risk_level, message = self._get_risk_level(prediction_proba)
             
             return prediction_proba, risk_level, message

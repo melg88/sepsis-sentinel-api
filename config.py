@@ -16,7 +16,7 @@ RAILWAY_ENVIRONMENT = os.environ.get("RAILWAY_ENVIRONMENT", "false").lower() == 
 # -----------------------------------------------------------------------------
 
 # Desenvolvimento local
-API_BASE_URL_LOCAL = "http://localhost:8000"
+API_BASE_URL_LOCAL = "https://sepsis-sentinel-production.up.railway.app"
 
 # Produção no Railway (será definida via variável de ambiente)
 API_BASE_URL_PRODUCTION = os.environ.get("API_URL", "https://seu-api.railway.app")
@@ -30,7 +30,7 @@ API_BASE_URL = API_BASE_URL_PRODUCTION if RAILWAY_ENVIRONMENT else API_BASE_URL_
 
 # Configurações do Streamlit
 STREAMLIT_CONFIG = {
-    "server_port": os.environ.get("PORT", 8501),
+    "server_port": os.environ.get("PORT", 8502),
     "server_address": "0.0.0.0",
     "server_headless": True,
     "browser_gather_usage_stats": False
