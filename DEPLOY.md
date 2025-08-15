@@ -118,13 +118,13 @@ Após o deploy, teste os endpoints:
 
 ```bash
 # Health check
-curl https://seu-app.railway.app/health
+curl sepsis-sentinel-api.railway.internal/health
 
 # Documentação
-https://seu-app.railway.app/docs
+sepsis-sentinel-api.railway.internal/docs
 
 # Predição (exemplo)
-curl -X POST https://seu-app.railway.app/predict \
+curl -X POST sepsis-sentinel-api.railway.internal/predict \
   -H "Content-Type: application/json" \
   -d '{
     "hr": 95,
@@ -230,9 +230,3 @@ Após o deploy bem-sucedido:
 3. ✅ Configure monitoramento
 4. ✅ Atualize o frontend com a URL da API em produção
 5. ✅ Teste o frontend com a API em produção
-
-## 📞 Suporte
-
-- **Railway Docs**: [docs.railway.app](https://docs.railway.app)
-- **Issues**: Abra uma issue no repositório
-- **Discord**: [Railway Discord](https://discord.gg/railway)

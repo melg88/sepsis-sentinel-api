@@ -1,0 +1,64 @@
+# =============================================================================
+# MANIFEST.in - Arquivos incluídos no pacote Python
+# =============================================================================
+
+# Incluir arquivos de dados
+include data/*.csv
+include data/*.xlsx
+include data/*.json
+
+# Incluir arquivos de configuração
+include *.md
+include *.txt
+include *.yml
+include *.yaml
+include *.toml
+include *.json
+
+# Incluir arquivos de modelo ML
+include ml/*.joblib
+include ml/*.pkl
+include ml/*.h5
+
+# Incluir arquivos de configuração do Streamlit
+include frontend/.streamlit/*.toml
+
+# Incluir arquivos de configuração do Railway
+include railway*.json
+include Procfile
+include runtime.txt
+
+# Incluir arquivos Docker
+include Dockerfile*
+include docker-compose*.yml
+include .dockerignore
+
+# Incluir arquivos de script
+include scripts/*.py
+include scripts/*.sh
+include scripts/*.bat
+
+# Incluir arquivos de documentação
+include docs/*.md
+include docs/*.rst
+include docs/*.txt
+
+# Incluir arquivos de teste
+include tests/*.py
+include tests/*.yml
+include tests/*.json
+
+# Excluir arquivos desnecessários
+exclude *.pyc
+exclude __pycache__
+exclude .git*
+exclude .env
+exclude .venv
+exclude venv
+exclude env
+exclude .pytest_cache
+exclude .coverage
+exclude htmlcov
+exclude .mypy_cache
+exclude .ruff_cache
+exclude .black_cache
