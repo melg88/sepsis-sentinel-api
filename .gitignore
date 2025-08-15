@@ -140,7 +140,7 @@ dmypy.json
 Thumbs.db
 
 # Model files (large files)
-*.joblib
+#*.joblib
 *.pkl
 *.h5
 *.hdf5

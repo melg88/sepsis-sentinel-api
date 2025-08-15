@@ -1,6 +1,3 @@
-"""
-Script para treinar o modelo Random Forest para detecção de sepse
-"""
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -11,8 +8,7 @@ import joblib
 import os
 
 def load_and_preprocess_data():
-    """Carrega e pré-processa os dados"""
-    print("Carregando dados...")
+    print("Carregando dados... AGORA FOI")
     
     # Carrega o dataset
     df = pd.read_csv('data/dataset_processado.csv')
@@ -20,8 +16,6 @@ def load_and_preprocess_data():
     print(f"Dataset carregado com {len(df)} registros e {len(df.columns)} colunas")
     print(f"Colunas disponíveis: {list(df.columns)}")
     
-    # Seleciona as features relevantes para o modelo
-    # Usando as colunas que fazem sentido para predição de sepse
     feature_columns = [
         'HR_mean', 'O2Sat_mean', 'Temp_mean', 
         'SBP_mean', 'DBP_mean', 'MAP_mean', 'Resp_mean',
@@ -29,15 +23,12 @@ def load_and_preprocess_data():
         'HospAdmTime_mean', 'ICULOS_mean'
     ]
     
-    # Verifica se as colunas existem
     available_features = [col for col in feature_columns if col in df.columns]
     print(f"Features disponíveis: {available_features}")
     
-    # Seleciona apenas as features disponíveis
     X = df[available_features].copy()
     y = df['SepsisLabel']
     
-    # Remove linhas com valores NaN
     mask = ~(X.isnull().any(axis=1) | y.isnull())
     X = X[mask]
     y = y[mask]
@@ -48,10 +39,8 @@ def load_and_preprocess_data():
     return X, y
 
 def train_random_forest(X, y):
-    """Treina o modelo Random Forest"""
     print("Treinando modelo Random Forest...")
     
-    # Divide os dados em treino e teste
     X_train, X_test, y_train, y_test = train_test_split(
         X, y, test_size=0.2, random_state=42, stratify=y
     )
@@ -82,11 +71,9 @@ def train_random_forest(X, y):
     print(f"Cross-validation scores: {cv_scores}")
     print(f"CV média: {cv_scores.mean():.4f} (+/- {cv_scores.std() * 2:.4f})")
     
-    # Relatório de classificação
     print("\nRelatório de Classificação:")
     print(classification_report(y_test, y_pred))
     
-    # Matriz de confusão
     print("\nMatriz de Confusão:")
     print(confusion_matrix(y_test, y_pred))
     
@@ -102,16 +89,15 @@ def train_random_forest(X, y):
     return rf_model, X.columns.tolist()
 
 def save_model(model, feature_names):
-    """Salva o modelo treinado e as informações das features"""
+
     print("Salvando modelo...")
     
-    # Cria diretório se não existir
     os.makedirs('ml', exist_ok=True)
     
-    # Salva o modelo
+
     joblib.dump(model, 'ml/model.joblib')
     
-    # Salva as informações das features
+
     feature_info = {
         'feature_names': feature_names,
         'feature_importance': dict(zip(feature_names, model.feature_importances_))
@@ -122,17 +108,14 @@ def save_model(model, feature_names):
     print("Informações das features salvas em 'ml/feature_info.joblib'")
 
 def main():
-    """Função principal"""
     print("=== TREINAMENTO DO MODELO DE DETECÇÃO DE SEPSE ===\n")
     
     try:
-        # Carrega e pré-processa os dados
-        X, y = load_and_preprocess_data()
-        
-        # Treina o modelo
+
+        X, y = load_and_preprocess_data() 
+
         model, feature_names = train_random_forest(X, y)
         
-        # Salva o modelo
         save_model(model, feature_names)
         
         print("\n✅ Modelo treinado e salvo com sucesso!")
