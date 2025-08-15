@@ -8,8 +8,8 @@ from datetime import datetime
 import uvicorn
 import os
 
-from models.sepsis import SepsisInput, SepsisResponse, HealthCheck, ErrorResponse
-from services.sepsis_service import sepsis_service
+from api.models.sepsis import SepsisInput, SepsisResponse, HealthCheck, ErrorResponse
+from api.services.sepsis_service import sepsis_service
 
 # Configuração da aplicação
 app = FastAPI(
