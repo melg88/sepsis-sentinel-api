@@ -1,6 +1,13 @@
-# 🚨 Sepsis Sentinel API
+# 🚨 Sepsis Sentinel API - IA 
+
+Links Úteis:
+  - API: https://github.com/melg88/sepsis-sentinel-api
+  - FrontEnd: https://github.com/melg88/sepsis-sentinel-front-streamlit
+  - Relatório: 
 
 Sistema de detecção precoce de sepse usando Machine Learning com Random Forest, desenvolvido com FastAPI no backend e Streamlit no frontend.
+
+
 
 ## 🏗️ Arquitetura
 
@@ -10,7 +17,7 @@ sepsis-sentinel-api/
 │   ├── models/            # Modelos Pydantic
 │   ├── services/          # Lógica de negócio
 │   └── main.py            # Aplicação principal
-├── ml/                    # Machine Learning
+├── **ml/**                # Machine Learning
 │   ├── train_model.py     # Treinamento do modelo
 │   ├── predict.py         # Predições
 │   └── model.joblib       # Modelo treinado

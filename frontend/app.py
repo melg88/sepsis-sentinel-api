@@ -80,13 +80,11 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
-    max-width: 800px;
-    margin: 0 auto;
 }
 
 .traffic-light-circle {
-    width: 180px;
-    height: 180px;
+    width: 250px;
+    height: 250px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -95,7 +93,6 @@ body {
     color: white;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     margin-bottom: 2rem;
-    border: 4px solid rgba(255,255,255,0.3);
 }
 
 .traffic-light-circle.green { background: linear-gradient(145deg, #66bb6a, #388e3c); }
@@ -103,20 +100,20 @@ body {
 .traffic-light-circle.red { background: linear-gradient(145deg, #ef5350, #c62828); }
 
 .probability-value {
-    font-size: 3.5rem;
+    font-size: 5rem;
     font-weight: bold;
     line-height: 1;
-    margin-bottom: 0.2rem;
+
 }
 
 .probability-label {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-weight: 500;
-    opacity: 0.9;
+
 }
 
 .result-title {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
@@ -126,80 +123,18 @@ body {
 .result-title.red-text { color: #c62828; }
 
 .result-message {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     max-width: 600px;
-    line-height: 1.6;
+
 }
 
-/* Grids para detalhes */
-.details-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-    margin: 2rem 0;
-    width: 100%;
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    align-items: start;
-}
 
-@media (max-width: 768px) {
-    .details-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-    }
-}
 
-.detail-card {
-    background: white;
-    border-radius: 15px;
-    padding: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    border: 1px solid #e0e0e0;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    min-height: 500px;
-}
 
-.detail-card h3 {
-    color: #004d40;
-    margin-bottom: 1.2rem;
-    font-size: 1.3rem;
-    border-bottom: 2px solid #00796b;
-    padding-bottom: 0.5rem;
-}
 
-.detail-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0.5rem 0;
-    border-bottom: 1px solid #f0f0f0;
-    min-height: 2.8rem;
-}
 
-.detail-item:last-child {
-    border-bottom: none;
-}
 
-.detail-label {
-    font-weight: 600;
-    color: #555;
-    font-size: 0.95rem;
-}
 
-.detail-value {
-    font-weight: 500;
-    color: #333;
-    background: #f8f9fa;
-    padding: 0.3rem 0.8rem;
-    border-radius: 8px;
-    font-size: 0.9rem;
-}
-
-/* Grid para métricas (removido - não usado mais) */
 
 /* Estilos para histórico */
 .history-container {
@@ -220,73 +155,16 @@ body {
     margin: 20px 0;
 }
 
-/* Melhorias gerais */
-.stMarkdown {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
-/* Estilo para botões */
-.stButton > button {
-    border-radius: 25px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
 
-.stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-}
 
-/* Estilo para inputs */
-.stNumberInput > div > div > input {
-    border-radius: 12px;
-    border: 2px solid #e0e0e0;
-    transition: all 0.3s ease;
-}
 
-.stNumberInput > div > div > input:focus {
-    border-color: #00796b;
-    box-shadow: 0 0 0 3px rgba(0, 119, 107, 0.1);
-}
 
-/* Estilo para selectbox */
-.stSelectbox > div > div > div {
-    border-radius: 12px;
-    border: 2px solid #e0e0e0;
-}
 
-/* Estilo para tabs */
-.stTabs > div > div > div > div {
-    border-radius: 15px 15px 0 0;
-    overflow: hidden;
-}
 
-.stTabs > div > div > div > div > button {
-    border-radius: 0;
-    font-weight: 600;
-}
 
-/* Estilo para spinner */
-.stSpinner > div {
-    border-radius: 50%;
-}
 
-/* Estilo para métricas do Streamlit */
-.stMetric > div > div > div {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-radius: 12px;
-    padding: 1rem;
-    border: 1px solid #dee2e6;
-}
 
-/* Estilo para dataframes */
-.stDataFrame > div > div > div > div {
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-}
 
 </style>
 """, unsafe_allow_html=True)
@@ -447,19 +325,19 @@ def show_form_page():
         with st.spinner('Analisando dados e consultando o modelo preditivo...'):
             # Faz predição real via API
             success, result = predict_sepsis(patient_data)
-            
+
             if success:
                 # Salva no histórico
                 if "predictions" not in st.session_state:
                     st.session_state.predictions = []
-                
+
                 prediction_record = {
                     "timestamp": datetime.now().isoformat(),
                     "patient_data": patient_data,
                     "result": result
                 }
                 st.session_state.predictions.append(prediction_record)
-                
+
                 # Salva resultado e vai para página de resultado
                 st.session_state.result = result
                 st.session_state.page = 'result'
@@ -502,96 +380,89 @@ def show_result_page():
     </div>
     """, unsafe_allow_html=True)
 
-    # Informações adicionais em grids organizados
+    # Informações adicionais
     st.markdown("<br>", unsafe_allow_html=True)
-    
-    # Grid de detalhes organizados - lado a lado
-    st.markdown('<div class="details-grid">', unsafe_allow_html=True)
-    
-    # Card de Detalhes da Predição
-    st.markdown("""
-    <div class="detail-card">
-        <h3>📋 Detalhes da Predição</h3>
-        <div class="detail-item">
-            <span class="detail-label">Probabilidade:</span>
-            <span class="detail-value">{:.1%}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Nível de Risco:</span>
-            <span class="detail-value">{}</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Confiança:</span>
-            <span class="detail-value">Alta</span>
-        </div>
-        <div class="detail-item">
-            <span class="detail-label">Status:</span>
-            <span class="detail-value">Processado</span>
-        </div>
-    </div>
-    """.format(probability, result["risk_level"]), unsafe_allow_html=True)
-    
-    # Card de Dados do Paciente
-    patient_data = st.session_state.predictions[-1]["patient_data"]
-    
-    # Mapeamento de nomes em português
-    field_names = {
-        'hr': 'Frequência Cardíaca (bpm)',
-        'o2sat': 'Saturação de Oxigênio (%)',
-        'temp': 'Temperatura Corporal (°C)',
-        'sbp': 'Pressão Sistólica (mmHg)',
-        'dbp': 'Pressão Diastólica (mmHg)',
-        'map': 'Pressão Arterial Média (mmHg)',
-        'resp': 'Taxa Respiratória (rpm)',
-        'age': 'Idade (anos)',
-        'gender': 'Gênero',
-        'unit1': 'Unidade 1',
-        'unit2': 'Unidade 2',
-        'hosp_adm_time': 'Tempo de Internação (h)',
-        'iculos': 'Tempo na UTI (h)'
-    }
-    
-    # Mapeamento de valores para gênero
-    gender_values = {0: 'Feminino', 1: 'Masculino'}
-    unit_values = {0: 'Não', 1: 'Sim'}
-    
-    st.markdown("""
-    <div class="detail-card">
-        <h3>📊 Dados do Paciente</h3>
-    """, unsafe_allow_html=True)
-    
-    # Adiciona cada campo com nome em português
-    for field, value in patient_data.items():
-        if field in field_names:
-            display_name = field_names[field]
-            
-            # Formata valores especiais
-            if field == 'gender':
-                display_value = gender_values.get(value, str(value))
-            elif field in ['unit1', 'unit2']:
-                display_value = unit_values.get(value, str(value))
-            elif field in ['temp', 'map']:
-                display_value = f"{value:.1f}"
-            elif field in ['hosp_adm_time', 'iculos']:
-                display_value = f"{value:.0f}"
-            else:
-                display_value = str(value)
-            
-            st.markdown(f"""
-            <div class="detail-item">
-                <span class="detail-label">{display_name}:</span>
-                <span class="detail-value">{display_value}</span>
-            </div>
-            """, unsafe_allow_html=True)
-    
-    st.markdown("</div>", unsafe_allow_html=True)
-    
-    # Fecha o grid
-    st.markdown('</div>', unsafe_allow_html=True)
+
+    col_info1, col_info2 = st.columns(2)
+
+
+    with col_info1:
+        st.subheader("📋 Detalhes da Predição")
+         
+        # Cria DataFrame com detalhes da predição na vertical
+        prediction_data = [
+            {'Campo': 'Probabilidade', 'Valor': f"{probability:.1%}"},
+            {'Campo': 'Nível de Risco', 'Valor': result["risk_level"]},
+            {'Campo': 'Confiança', 'Valor': 'Alta'},
+            {'Campo': 'Status', 'Valor': 'Processado'}
+        ]
+         
+        # Cria DataFrame final na vertical
+        prediction_df = pd.DataFrame(prediction_data)
+         
+        # Exibe a tabela na vertical sem índices
+        st.dataframe(prediction_df, use_container_width=True, hide_index=True)
+        
+    with col_info2:
+        st.subheader("📊 Dados do Paciente")
+         
+        # Dados do paciente
+        patient_data = st.session_state.predictions[-1]["patient_data"]
+         
+        # Mapeamento de nomes amigáveis em português
+        field_names = {
+            'hr': 'Frequência Cardíaca (bpm)',
+            'o2sat': 'Saturação de Oxigênio (%)',
+            'temp': 'Temperatura Corporal (°C)',
+            'sbp': 'Pressão Sistólica (mmHg)',
+            'dbp': 'Pressão Diastólica (mmHg)',
+            'map': 'Pressão Arterial Média (mmHg)',
+            'resp': 'Taxa Respiratória (rpm)',
+            'age': 'Idade (anos)',
+            'gender': 'Gênero',
+            'unit1': 'Unidade 1',
+            'unit2': 'Unidade 2',
+            'hosp_adm_time': 'Tempo de Internação (h)',
+            'iculos': 'Tempo na UTI (h)'
+        }
+         
+        # Mapeamento de valores para gênero e unidades
+        gender_values = {0: 'Feminino', 1: 'Masculino'}
+        unit_values = {0: 'Não', 1: 'Sim'}
+         
+                 # Cria DataFrame com nomes amigáveis na vertical
+        display_data = []
+        for field, value in patient_data.items():
+            if field in field_names:
+                display_name = field_names[field]
+                 
+                # Formata valores especiais
+                if field == 'gender':
+                    display_value = gender_values.get(value, str(value))
+                elif field in ['unit1', 'unit2']:
+                    display_value = unit_values.get(value, str(value))
+                elif field in ['temp', 'map']:
+                    display_value = f"{value:.1f}"
+                elif field in ['hosp_adm_time', 'iculos']:
+                    display_value = f"{value:.0f}"
+                else:
+                    display_value = str(value)
+                 
+                display_data.append({
+                    'Campo': display_name,
+                    'Valor': display_value
+                })
+         
+        # Cria DataFrame final na vertical
+        patient_df = pd.DataFrame(display_data)
+         
+        # Exibe a tabela na vertical sem índices
+        st.dataframe(patient_df, use_container_width=True, hide_index=True)
+
 
     st.markdown("<br><br>", unsafe_allow_html=True)
     _, col_button, _ = st.columns([2, 3, 2])
-    
+
     if col_button.button("⬅️ Voltar e Inserir Novos Dados", type="secondary"):
         st.session_state.page = 'form'
         st.rerun()
@@ -599,45 +470,75 @@ def show_result_page():
 def show_history_page():
     """Renderiza a página de histórico de predições"""
     st.header("📊 Histórico de Predições")
-    
+
     if "predictions" in st.session_state and st.session_state.predictions:
-        # Cria DataFrame com histórico
+        # Cria DataFrame com histórico na vertical
         history_data = []
         for pred in st.session_state.predictions:
-            history_data.append({
-                "Data/Hora": datetime.fromisoformat(pred["timestamp"]).strftime("%d/%m/%Y %H:%M"),
-                "Risco": pred["result"]["risk_level"],
-                "Probabilidade": f"{pred['result']['prediction']:.1%}",
-                "FC": pred["patient_data"]["hr"],
-                "O2": pred["patient_data"]["o2sat"],
-                "Temp": pred["patient_data"]["temp"],
-                "PAS": pred["patient_data"]["sbp"],
-                "PAD": pred["patient_data"]["dbp"]
-            })
+            # Dados da predição
+            pred_data = {
+                'Data/Hora': datetime.fromisoformat(pred["timestamp"]).strftime("%d/%m/%Y %H:%M"),
+                'Risco': pred["result"]["risk_level"],
+                'Probabilidade': f"{pred['result']['prediction']:.1%}",
+                'Frequência Cardíaca (bpm)': pred["patient_data"]["hr"],
+                'Saturação de Oxigênio (%)': pred["patient_data"]["o2sat"],
+                'Temperatura Corporal (°C)': f"{pred['patient_data']['temp']:.1f}",
+                'Pressão Sistólica (mmHg)': pred["patient_data"]["sbp"],
+                'Pressão Diastólica (mmHg)': pred["patient_data"]["dbp"]
+            }
+            
+                         # Adiciona cada campo como uma linha separada
+            for field, value in pred_data.items():
+                history_data.append({
+                    'Campo': field,
+                    'Valor': value
+                })
         
+        # Cria DataFrame final na vertical
         history_df = pd.DataFrame(history_data)
         
-        # Estilo melhorado para o DataFrame
-        st.markdown("""
-        <style>
-        .stDataFrame {
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-        </style>
-        """, unsafe_allow_html=True)
+        # Exibe a tabela na vertical sem índices usando container estável
+        if 'history_container' not in st.session_state:
+            st.session_state.history_container = st.empty()
         
-        st.dataframe(history_df, use_container_width=True)
+        with st.session_state.history_container.container():
+            st.dataframe(
+                history_df, 
+                use_container_width=True, 
+                hide_index=True,
+                height=400,  # Altura fixa
+                column_config={
+                    "Campo": st.column_config.TextColumn(
+                        "Campo",
+                        width="medium",
+                        help="Campo clínico analisado"
+                    ),
+                    "Valor": st.column_config.TextColumn(
+                        "Valor",
+                        width="medium",
+                        help="Valor correspondente ao campo"
+                    )
+                }
+            )
         
+        # Adiciona separador visual entre predições
+        st.markdown("---")
+        st.markdown("**📋 Resumo das Predições:**")
+        
+        # Mostra resumo compacto por predição
+        for i, pred in enumerate(st.session_state.predictions):
+            st.markdown(f"**Predição {i+1}** - {datetime.fromisoformat(pred['timestamp']).strftime('%d/%m/%Y %H:%M')}")
+            st.markdown(f"- Risco: {pred['result']['risk_level']} | Probabilidade: {pred['result']['prediction']:.1%}")
+            st.markdown("---")
+
         # Gráfico de evolução temporal
         if len(history_data) > 1:
             st.subheader("📈 Evolução Temporal")
-            
+
             # Converte probabilidades para valores numéricos
             prob_values = [float(pred["result"]["prediction"]) for pred in st.session_state.predictions]
             timestamps = [datetime.fromisoformat(pred["timestamp"]) for pred in st.session_state.predictions]
-            
+
             fig = px.line(
                 x=timestamps,
                 y=prob_values,
@@ -652,7 +553,7 @@ def show_history_page():
 def show_about_page():
     """Renderiza a página sobre o sistema"""
     st.header("ℹ️ Sobre o Sistema")
-    
+
     st.markdown("""
     ### 🚨 Sepsis Sentinel
     
@@ -683,12 +584,12 @@ def show_about_page():
     Este sistema é uma ferramenta de apoio à decisão clínica e não substitui 
     a avaliação médica profissional.
     """)
-    
+
     # Informações técnicas
     st.subheader("🔧 Informações Técnicas")
-    
+
     col_tech1, col_tech2 = st.columns(2)
-    
+
     with col_tech1:
         st.markdown("""
         **Backend:**
@@ -701,7 +602,7 @@ def show_about_page():
         - Plotly
         - Pandas
         """)
-    
+
     with col_tech2:
         st.markdown("""
         **ML Model:**
@@ -725,19 +626,16 @@ if 'result' not in st.session_state:
     st.session_state.result = None
 
 # Cabeçalho e Disclaimer (aparecem em todas as "páginas")
-st.title("🩺 Sepsis Sentinel")
-st.markdown("#### Sistema de Detecção Precoce de Sepse - Uma ferramenta de apoio baseada em Machine Learning")
+st.title("🏥 Sepsis Sentinel AI")
+st.markdown("#### **Sistema Inteligente de Detecção Precoce de Sepse**")
+st.markdown("*Plataforma de Apoio à Decisão Clínica com Machine Learning*")
 st.markdown("---")
 
-# Verificação de saúde da API
+# Verificação de saúde da API (apenas para logs)
 api_healthy, health_data = check_api_health()
 
-if api_healthy:
-    if health_data and health_data.get("model_loaded"):
-        st.success("✅ API Conectada e Modelo ML Carregado")
-    else:
-        st.warning("⚠️ API Conectada, mas Modelo ML não disponível")
-else:
+# Log da verificação (não exibido na interface)
+if not api_healthy:
     st.error("❌ API Desconectada - Verifique se o backend está rodando")
 
 st.warning("""

@@ -1,6 +1,3 @@
-"""
-Script para treinar o modelo Random Forest para detecção de sepse
-"""
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
@@ -11,8 +8,7 @@ import joblib
 import os
 
 def load_and_preprocess_data():
-    """Carrega e pré-processa os dados"""
-    print("Carregando dados...")
+    print("Carregando dados... AGORA FOI")
     
     # Carrega o dataset
     df = pd.read_csv('data/dataset_processado.csv')
@@ -48,7 +44,6 @@ def load_and_preprocess_data():
     return X, y
 
 def train_random_forest(X, y):
-    """Treina o modelo Random Forest"""
     print("Treinando modelo Random Forest...")
     
     # Divide os dados em treino e teste
@@ -102,7 +97,7 @@ def train_random_forest(X, y):
     return rf_model, X.columns.tolist()
 
 def save_model(model, feature_names):
-    """Salva o modelo treinado e as informações das features"""
+
     print("Salvando modelo...")
     
     # Cria diretório se não existir
@@ -122,7 +117,6 @@ def save_model(model, feature_names):
     print("Informações das features salvas em 'ml/feature_info.joblib'")
 
 def main():
-    """Função principal"""
     print("=== TREINAMENTO DO MODELO DE DETECÇÃO DE SEPSE ===\n")
     
     try:
