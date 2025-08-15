@@ -13,8 +13,8 @@ projeto-sepse-crisp-dm/
 ├── dataset/                              # Conjunto de dados original utilizado no estudo
 │   └── sepsis_data.csv
 ├── docs/                                 # Artigos acadêmicos do projeto
-│   ├── versao_completa.pdf               # Artigo completo com todo o detalhamento metodológico
-│   └── versao_resumida.pdf               # Versão resumida de 5 páginas do artigo
+│   ├── relatorio_versao_completa.pdf               # Artigo completo com todo o detalhamento metodológico
+│   └── relatorio_versao_resumida.pdf               # Versão resumida de 5 páginas do artigo
 ├── notebook/                             # Notebook com o código-fonte
 │   └── analise_e_treinamento.ipynb       # Código de análise, limpeza, treinamento e avaliação
 ├── slides/                               # Apresentação final do projeto
@@ -119,3 +119,4 @@ MIT License
 - Maria Eduarda de Lima Gomes  
 
 **Orientador:** Prof. Flávio Arthur Oliveira dos Santos
+
