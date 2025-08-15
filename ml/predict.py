@@ -5,8 +5,8 @@ from typing import Dict, Any, Tuple
 
 class SepsisPredictor:
     
-    def __init__(self, model_path: str = '../ml/model.joblib', 
-                 feature_info_path: str = '../ml/feature_info.joblib'):
+    def __init__(self, model_path: str = 'ml/model.joblib', 
+                 feature_info_path: str = 'ml/feature_info.joblib'):
         try:
             self.model = joblib.load(model_path)
             self.feature_info = joblib.load(feature_info_path)

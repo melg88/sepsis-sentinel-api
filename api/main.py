@@ -1,6 +1,3 @@
-"""
-API FastAPI para detecção de sepse
-"""
 from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
@@ -31,7 +28,6 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def startup_event():
-    """Evento executado na inicialização da aplicação"""
     print("🚀 Iniciando Sepsis Sentinel API...")
     print(f"📊 Status do modelo: {'✅ Carregado' if sepsis_service.model_loaded else '❌ Não carregado'}")
 
@@ -47,7 +43,6 @@ async def root():
 
 @app.get("/health", response_model=HealthCheck, tags=["Health"])
 async def health_check():
-    """Verificação de saúde da API"""
     service_status = sepsis_service.get_health_status()
     
     return HealthCheck(
@@ -116,7 +111,6 @@ async def predict_sepsis(input_data: SepsisInput):
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception):
-    """Handler global para exceções não tratadas"""
     return JSONResponse(
         status_code=500,
         content=ErrorResponse(

@@ -1,7 +1,3 @@
-"""
-Setup script para o Sepsis Sentinel API
-Resolve problemas de importação e estrutura o projeto como um pacote Python
-"""
 from setuptools import setup, find_packages
 import os
 

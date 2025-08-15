@@ -70,19 +70,15 @@ LOG_LEVEL = "INFO" if RAILWAY_ENVIRONMENT else "DEBUG"
 # -----------------------------------------------------------------------------
 
 def get_api_url() -> str:
-    """Retorna a URL da API baseada no ambiente"""
     return API_BASE_URL
 
 def is_production() -> bool:
-    """Verifica se está rodando em produção"""
     return RAILWAY_ENVIRONMENT
 
 def get_model_path() -> str:
-    """Retorna o caminho do modelo ML"""
     return MODEL_PATHS["model"]
 
 def get_feature_info_path() -> str:
-    """Retorna o caminho das informações das features"""
     return MODEL_PATHS["feature_info"]
 
 # -----------------------------------------------------------------------------
@@ -126,7 +122,6 @@ REDIS_URL = os.environ.get("REDIS_URL", None)
 # -----------------------------------------------------------------------------
 
 def validate_config():
-    """Valida se todas as configurações necessárias estão presentes"""
     required_vars = []
     
     if RAILWAY_ENVIRONMENT:
@@ -149,7 +144,6 @@ def validate_config():
 # -----------------------------------------------------------------------------
 
 def print_config():
-    """Imprime a configuração atual para debug"""
     print("🔧 CONFIGURAÇÃO ATUAL:")
     print(f"   Ambiente: {'🚀 Produção (Railway)' if RAILWAY_ENVIRONMENT else '💻 Desenvolvimento Local'}")
     print(f"   API URL: {API_BASE_URL}")
